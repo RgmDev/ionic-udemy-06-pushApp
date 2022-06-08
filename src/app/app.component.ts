@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
+
+import { PushService } from './services/push.service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,12 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    platform: Platform,
+    pushService: PushService
+  ) {
+    platform.ready().then( () => {
+      pushService.OneSignalInit();
+    })
+  }
 }
